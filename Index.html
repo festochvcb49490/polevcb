@@ -93,6 +93,12 @@
             flex-direction: column;
             gap: 15px;
         }
+	.remove-volunteer {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+
         .subpole-info {
             margin-bottom: 15px;
             padding-left: 10px;
@@ -803,31 +809,48 @@
         }
     }
 
-    function afficherInscrits(pole) {
-        const listeInscrits = document.getElementById(`liste-inscrits-${pole}`);
-        if (!listeInscrits) {
-            console.warn(`Liste d'inscrits introuvable pour ${pole}`);
-            return;
-        }
-        
-        listeInscrits.innerHTML = "";
-
-        db.collection("inscriptions").doc(pole).collection("benevoles")
-            .orderBy("timestamp")
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(doc => {
-                    const data = doc.data();
-                    const li = document.createElement("li");
-                    li.textContent = data.prenom;
-                    listeInscrits.appendChild(li);
-                });
-            })
-            .catch(error => {
-                console.error("Erreur de récupération des inscrits pour", pole, error);
-                listeInscrits.innerHTML = "<li>Erreur de chargement</li>";
-            });
+function afficherInscrits(pole) {
+    const listeInscrits = document.getElementById(`liste-inscrits-${pole}`);
+    if (!listeInscrits) {
+        console.warn(`Liste d'inscrits introuvable pour ${pole}`);
+        return;
     }
+    
+    listeInscrits.innerHTML = "";
+
+    db.collection("inscriptions").doc(pole).collection("benevoles")
+        .orderBy("timestamp")
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                const li = document.createElement("li");
+                li.textContent = data.prenom;
+                
+                // Créer une croix rouge pour supprimer
+                const deleteBtn = document.createElement("span");
+                deleteBtn.innerHTML = " &#10060;"; // Emoji croix rouge
+                deleteBtn.style.color = "red";
+                deleteBtn.style.cursor = "pointer";
+                deleteBtn.style.marginLeft = "5px";
+                deleteBtn.title = "Supprimer ce bénévole";
+                
+                // Ajouter l'événement de clic pour supprimer
+                deleteBtn.addEventListener("click", function() {
+                    if (confirm(`Voulez-vous vraiment supprimer ${data.prenom} ?`)) {
+                        supprimerBenevole(pole, doc.id);
+                    }
+                });
+                
+                li.appendChild(deleteBtn);
+                listeInscrits.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error("Erreur de récupération des inscrits pour", pole, error);
+            listeInscrits.innerHTML = "<li>Erreur de chargement</li>";
+        });
+}
     
     // Attendre que le DOM soit complètement chargé
     document.addEventListener('DOMContentLoaded', () => {
@@ -901,6 +924,19 @@
             }
         });
     });
+
+function supprimerBenevole(pole, docId) {
+    db.collection("inscriptions").doc(pole).collection("benevoles").doc(docId)
+        .delete()
+        .then(() => {
+            console.log("Bénévole supprimé avec succès de", pole);
+            afficherInscrits(pole); // Rafraîchir la liste
+        })
+        .catch(error => {
+            console.error("Erreur lors de la suppression du bénévole de", pole, error);
+            alert("Erreur: Impossible de supprimer. Réessayez.");
+        });
+}
 </script>
 </body>
 </html>
