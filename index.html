@@ -817,79 +817,117 @@
             });
         });
 
-        function ajouterInscrit(pole) {
-    const prenomInput = document.getElementById(`prenom-${pole}`);
-    const prenom = prenomInput.value.trim(); // Récupérer le prénom et enlever les espaces
-
-    if (prenom !== "") {
-        // Ajouter à Firestore
-        db.collection("inscriptions").doc(pole).collection("benevoles").add({
-            prenom: prenom,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp() // Ajouter un timestamp pour l'ordre
-        })
-        .then(() => {
-            console.log("Inscription ajoutée pour", pole);
-            prenomInput.value = ""; // Effacer le champ
-            afficherInscrits(pole); // Mettre à jour l'affichage
-        })
-        .catch(error => {
-            console.error("Erreur d'inscription pour", pole, error);
-            alert("Erreur: Impossible de s'inscrire. Réessayez.");
-        });
-    } else {
-        alert("Veuillez entrer votre prénom.");
-    }
-}
-
-function afficherInscrits(pole) {
-    const listeInscrits = document.getElementById(`liste-inscrits-${pole}`);
-    listeInscrits.innerHTML = ""; // Efface la liste
-
-    db.collection("inscriptions").doc(pole).collection("benevoles")
-        .orderBy("timestamp") // Pour l'ordre
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                const data = doc.data();
-                const li = document.createElement("li");
-                li.textContent = data.prenom;
-                listeInscrits.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.error("Erreur de récupération des inscrits pour", pole, error);
-            listeInscrits.innerHTML = "<li>Erreur de chargement</li>";
-        });
-}
-
-// Appeler afficherInscrits() pour chaque pôle au chargement de la page
-document.querySelectorAll('.pole-tile').forEach(tile => {
-    const pole = tile.querySelector('.inscrire-btn').dataset.pole;
-    afficherInscrits(pole);
-});
-    </script>
+        
 <script>
-// Initialize Firebase
+    // Initialize Firebase
     const firebaseConfig = {
-
-  apiKey: "AIzaSyCZP6OfDs1R0rXqlQRTDm2poCt2CAoCK9U",
-
-  authDomain: "festoch-orgamme.firebaseapp.com",
-
-  databaseURL: "https://festoch-orgamme-default-rtdb.europe-west1.firebasedatabase.app",
-
-  projectId: "festoch-orgamme",
-
-  storageBucket: "festoch-orgamme.firebasestorage.app",
-
-  messagingSenderId: "1076396926378",
-
-  appId: "1:1076396926378:web:f8815d878def0985b9b7d3"
-
-};
-
+        apiKey: "AIzaSy...",
+        authDomain: "festoch-orgamme.firebaseapp.com",
+        databaseURL: "https://festoch-orgamme-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "festoch-orgamme",
+        storageBucket: "festoch-orgamme.firebasestorage.app",
+        messagingSenderId: "1076...",
+        appId: "1:1076...:web:f881..."
+    };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
+    const plusInfosButtons = document.querySelectorAll('.plus-infos-btn');
+    const infosContainers = document.querySelectorAll('.infos-container');
+    const inscrireButtons = document.querySelectorAll('.inscrire-btn');
+    const inscrireSubpoleButtons = document.querySelectorAll('.inscrire-btn-subpole');
+
+    plusInfosButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const pole = button.dataset.pole;
+            const infosContainer = document.getElementById(`infos-${pole}`);
+            if (infosContainer.style.display === 'none' || infosContainer.style.display === '') {
+                infosContainer.style.display = 'flex';
+            } else {
+                infosContainer.style.display = 'none';
+            }
+        });
+    });
+
+    inscrireButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const infosContainerId = button.closest('.infos-container').id;
+            const inscriptionDiv = document.getElementById(`inscription-${infosContainerId.replace('infos-', '')}`);
+
+            if (inscriptionDiv) {
+                if (inscriptionDiv.style.display === 'none' || inscriptionDiv.style.display === '') {
+                    inscriptionDiv.style.display = 'block';
+                } else {
+                    inscriptionDiv.style.display = 'none';
+                }
+            }
+        });
+    });
+
+    inscrireSubpoleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const infosContainerId = button.closest('.infos-container').id;
+            const inscriptionDiv = document.getElementById(`inscription-${infosContainerId.replace('infos-', '')}`);
+
+            if (inscriptionDiv) {
+                if (inscriptionDiv.style.display === 'none' || inscriptionDiv.style.display === '') {
+                    inscriptionDiv.style.display = 'block';
+                } else {
+                    inscriptionDiv.style.display = 'none';
+                }
+            }
+        });
+    });
+
+    function ajouterInscrit(pole) {
+        const prenomInput = document.getElementById(`prenom-${pole}`);
+        const prenom = prenomInput.value.trim();
+
+        if (prenom !== "") {
+            db.collection("inscriptions").doc(pole).collection("benevoles").add({
+                prenom: prenom,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                console.log("Inscription ajoutée pour", pole);
+                prenomInput.value = "";
+                afficherInscrits(pole);
+            })
+            .catch(error => {
+                console.error("Erreur d'inscription pour", pole, error);
+                alert("Erreur: Impossible de s'inscrire. Réessayez.");
+            });
+        } else {
+            alert("Veuillez entrer votre prénom.");
+        }
+    }
+
+    function afficherInscrits(pole) {
+        const listeInscrits = document.getElementById(`liste-inscrits-${pole}`);
+        listeInscrits.innerHTML = "";
+
+        db.collection("inscriptions").doc(pole).collection("benevoles")
+            .orderBy("timestamp")
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    const data = doc.data();
+                    const li = document.createElement("li");
+                    li.textContent = data.prenom;
+                    listeInscrits.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error("Erreur de récupération des inscrits pour", pole, error);
+                listeInscrits.innerHTML = "<li>Erreur de chargement</li>";
+            });
+    }
+
+    document.querySelectorAll('.pole-tile').forEach(tile => {
+        const pole = tile.querySelector('.inscrire-btn').dataset.pole;
+        afficherInscrits(pole);
+    });
+</script>
 </body>
 </html>
