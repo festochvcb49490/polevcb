@@ -832,52 +832,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    const plusInfosButtons = document.querySelectorAll('.plus-infos-btn');
-    const infosContainers = document.querySelectorAll('.infos-container');
-    const inscrireButtons = document.querySelectorAll('.inscrire-btn');
-    const inscrireSubpoleButtons = document.querySelectorAll('.inscrire-btn-subpole');
-
-    plusInfosButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const pole = button.dataset.pole;
-            const infosContainer = document.getElementById(`infos-${pole}`);
-            if (infosContainer.style.display === 'none' || infosContainer.style.display === '') {
-                infosContainer.style.display = 'flex';
-            } else {
-                infosContainer.style.display = 'none';
-            }
-        });
-    });
-
-    inscrireButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const infosContainerId = button.closest('.infos-container').id;
-            const inscriptionDiv = document.getElementById(`inscription-${infosContainerId.replace('infos-', '')}`);
-
-            if (inscriptionDiv) {
-                if (inscriptionDiv.style.display === 'none' || inscriptionDiv.style.display === '') {
-                    inscriptionDiv.style.display = 'block';
-                } else {
-                    inscriptionDiv.style.display = 'none';
-                }
-            }
-        });
-    });
-
-    inscrireSubpoleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const infosContainerId = button.closest('.infos-container').id;
-            const inscriptionDiv = document.getElementById(`inscription-${infosContainerId.replace('infos-', '')}`);
-
-            if (inscriptionDiv) {
-                if (inscriptionDiv.style.display === 'none' || inscriptionDiv.style.display === '') {
-                    inscriptionDiv.style.display = 'block';
-                } else {
-                    inscriptionDiv.style.display = 'none';
-                }
-            }
-        });
-    });
+    
 
     function ajouterInscrit(pole) {
         const prenomInput = document.getElementById(`prenom-${pole}`);
