@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organigramme Participatif - Festoch' Viens Chercher Bonheur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ajoutez ici des styles personnalisés pour compléter Tailwind si nécessaire */
+        body {
+            font-family: 'Open Sans Condensed', sans-serif; /* Utilisez Open Sans Condensed pour les titres, si vous le souhaitez */
+            background-color: #f0fdf4; /* Vert très clair, plus doux */
+            margin: 0;
+            padding: 0; /* Enlevez le padding par défaut du body pour un contrôle plus précis */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto; /* Centre le conteneur et ajoute de la marge */
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+    color: #15803d;
+    margin-bottom: 10px;
+    font-size: 3.5em;  /* Ou la taille que vous préférez */
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+        header img {
+            max-width: 150px;
+            height: auto;
+            margin-top: 10px;
+        }
+        .pole-tile {
+            background-color: white; /* Fond blanc pour les cartes */
+            border-radius: 12px; /* Bordures plus arrondies */
+            padding: 25px; /* Augmentez un peu le padding */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour la profondeur */
+            width: calc(33% - 20px);
+            box-sizing: border-box;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Ajoute des transitions */
+        }
+        .pole-tile:hover {
+            transform: translateY(-5px); /* Léger mouvement vers le haut au survol */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée au survol */
+        }
+        @media (max-width: 768px) {
+            .pole-tile {
+                width: calc(100% - 20px);
+            }
+        }
+        .pole-title {
+            font-size: 1.8em; /* Titres de pôle plus grands */
+            font-weight: bold;
+            color: #16a34a; /* Vert plus vif */
+            margin-bottom: 15px;
+            font-family: 'Open Sans Condensed', sans-serif; /* Appliquez la police Open Sans Condensed */
+        }
+        .pole-subpoles {
+            font-style: italic;
+            color: #34d399;
+            margin-bottom: 15px;
+        }
+        .button {
+            background-color: #a7f3d0;
+            color: #15803d;
+            border: none;
+            border-radius: 10px; /* Bordures plus arrondies */
+            padding: 12px 25px; /* Augmentez le padding des boutons */
+            margin-right: 10px;
+            cursor: pointer;
+            font-family: 'Open Sans Condensed', sans-serif; /* Appliquez la police Open Sans Condensed */
+            font-size: 1.1em; /* Augmentez la taille de la police des boutons */
+            transition: background-color 0.3s ease; /* Ajoute une transition de couleur */
+        }
+        .button:hover {
+            background-color: #34d399; /* Vert plus foncé au survol */
+            color: white;
+        }
+        .infos-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #eff6ff; /* Bleu très clair */
+            border-radius: 10px;
+            border: 1px solid #d1d8f3; /* Bordure bleu clair */
+            flex-direction: column;
+            gap: 15px;
+        }
+	.remove-volunteer {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+
+        .subpole-info {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 2px solid #60a5fa; /* Bordure gauche bleue pour les sous-pôles */
+        }
+        .subpole-title {
+            font-size: 1.2em; /* Augmentez la taille des titres de sous-pôles */
+            font-weight: bold;
+            color: #2563eb; /* Bleu plus foncé */
+            margin-bottom: 10px;
+            font-family: 'Open Sans Condensed', sans-serif; /* Appliquez la police Open Sans Condensed */
+        }
+        .pole-referents {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4b5563; /* Gris plus foncé pour les référents */
+        }
+        .inscrire-btn-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .inscrire-btn {
+            background-color: #fcd34d; /* Jaune */
+            color: #1e293b; /* Gris très foncé */
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-family: 'Open Sans Condensed', sans-serif; /* Appliquez la police Open Sans Condensed */
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        .inscrire-btn:hover {
+            background-color: #d97706; /* Jaune plus foncé */
+            color: white;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #d1d5db; /* Bordure grise pour les inputs */
+            border-radius: 5px;
+            margin-right: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3b82f6; /* Bordure bleue au focus */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); /* Ombre bleue au focus */
+        }
+        #inscription-prev, #inscription-aprem-marmot, #inscription-merch, #inscription-secu,
+        #inscription-comm, #inscription-cuisine, #inscription-green-team,
+        #inscription-montage-demontage, #inscription-relation-artiste,
+        #inscription-bar, #inscription-coordo-benevole, #inscription-finances {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f7fafc;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            display: none; /* Cachez les sections d'inscription par défaut */
+        }
+    </style>
+
+<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+    <div>
+        <a href="https://ibb.co/C55hjK5N"><img src="https://i.ibb.co/SXXRkwXW/logo-VCB-2023-V2-3.png" alt="logo-VCB-2023-V2-3" border="0"></a>
+    </div>
+    <h1>Organigramme Participatif pour le Festoch' Viens Chercher Bonheur</h1>
+</header>
+
+<style>
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    header div a img {
+        max-width: 150px;
+        height: auto;
+        position: static;
+        top: auto;
+        right: auto;
+        z-index: 1000;
+        border: none;
+    }
+</style>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Prév</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-referents">Référents : Matt C, Cricri, Nico, Marco, étudiants/néo diplômé noyantais</p>
+            <button class="button plus-infos-btn" data-pole="prev">Plus d'infos</button>
+            <div class="infos-container" id="infos-prev">
+                <div class="inscrire-btn-container">
+                    <button class="button inscrire-btn" data-pole="prev">M'inscrire</button>
+                </div>
+                <div id="inscription-prev" style="margin-top: 10px;">
+                    <label for="prenom-prev">Ton prénom :</label>
+                    <input type="text" id="prenom-prev" name="prenom-prev">
+                    <button class="button" onclick="ajouterInscrit('prev')">Valider</button>
+                    <div id="inscrits-prev" style="margin-top: 10px;">
+                        Inscrits :
+                        <ul id="liste-inscrits-prev">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Aprèm marmot</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-referents">Référents : Sylvie, Delph, Sandrine</p>
+            <button class="button plus-infos-btn" data-pole="aprem-marmot">Plus d'infos</button>
+            <div class="infos-container" id="infos-aprem-marmot">
+                <div class="inscrire-btn-container">
+                    <button class="button inscrire-btn" data-pole="aprem-marmot">M'inscrire</button>
+                </div>
+                 <div id="inscription-aprem-marmot" style="margin-top: 10px;">
+                    <label for="prenom-aprem-marmot">Ton prénom :</label>
+                    <input type="text" id="prenom-aprem-marmot" name="prenom-aprem-marmot">
+                    <button class="button" onclick="ajouterInscrit('aprem-marmot')">Valider</button>
+                    <div id="inscrits-aprem-marmot" style="margin-top: 10px;">
+                        Inscrits :
+                        <ul id="liste-inscrits-aprem-marmot">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Merch</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-referents">Référents : Anne, Solène</p>
+            <button class="button plus-infos-btn" data-pole="merch">Plus d'infos</button>
+            <div class="infos-container" id="infos-merch">
+                <div class="inscrire-btn-container">
+                    <button class="button inscrire-btn" data-pole="merch">M'inscrire</button>
+                </div>
+                <div id="inscription-merch" style="margin-top: 10px;">
+                    <label for="prenom-merch">Ton prénom :</label>
+                    <input type="text" id="prenom-merch" name="prenom-merch">
+                    <button class="button" onclick="ajouterInscrit('merch')">Valider</button>
+                    <div id="inscrits-merch" style="margin-top: 10px;">
+                        Inscrits :
+                        <ul id="liste-inscrits-merch">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Sécu (scène, site,...)</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-referents">Référents : Bebel</p>
+            <button class="button plus-infos-btn" data-pole="secu">Plus d'infos</button>
+            <div class="infos-container" id="infos-secu">
+                <div class="inscrire-btn-container">
+                    <button class="button inscrire-btn" data-pole="secu">M'inscrire</button>
+                </div>
+                <div id="inscription-secu" style="margin-top: 10px;">
+                    <label for="prenom-secu">Ton prénom :</label>
+                    <input type="text" id="prenom-secu" name="prenom-secu">
+                    <button class="button" onclick="ajouterInscrit('secu')">Valider</button>
+                    <div id="inscrits-secu" style="margin-top: 10px;">
+                        Inscrits :
+                        <ul id="liste-inscrits-secu">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Comm'</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-subpoles">Sous-pôles : Pancartage Extérieur site, Pancartage Intérieur Site, Réseaux Sociaux/site Internet, Diffusion radio, tv, site internet</p>
+            <p class="pole-referents">Référent : Nico</p>
+            <button class="button plus-infos-btn" data-pole="comm">Plus d'infos</button>
+            <div class="infos-container" id="infos-comm">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Pancartage Extérieur site</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Sylvie</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="pancartage-exterieur">M'inscrire</button>
+                    </div>
+                     <div id="inscription-comm" style="margin-top: 10px;">
+                        <label for="prenom-pancartage-exterieur">Ton prénom :</label>
+                        <input type="text" id="prenom-pancartage-exterieur" name="prenom-pancartage-exterieur">
+                        <button class="button" onclick="ajouterInscrit('pancartage-exterieur')">Valider</button>
+                        <div id="inscrits-pancartage-exterieur" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-pancartage-exterieur">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Pancartage Intérieur Site</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Jane</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="pancartage-interieur">M'inscrire</button>
+                    </div>
+                    <div id="inscription-comm" style="margin-top: 10px;">
+                        <label for="prenom-pancartage-interieur">Ton prénom :</label>
+                        <input type="text" id="prenom-pancartage-interieur" name="prenom-pancartage-interieur">
+                        <button class="button" onclick="ajouterInscrit('pancartage-interieur')">Valider</button>
+                        <div id="inscrits-pancartage-interieur" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-pancartage-interieur">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Réseaux Sociaux/site Internet</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référents : Mathis, Clém</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="reseaux-sociaux">M'inscrire</button>
+                    </div>
+                    <div id="inscription-comm" style="margin-top: 10px;">
+                        <label for="prenom-reseaux-sociaux">Ton prénom :</label>
+                        <input type="text" id="prenom-reseaux-sociaux" name="prenom-reseaux-sociaux">
+                        <button class="button" onclick="ajouterInscrit('reseaux-sociaux')">Valider</button>
+                        <div id="inscrits-reseaux-sociaux" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-reseaux-sociaux">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Diffusion radio, tv, site internet</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référents : Célinette, Clém</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="diffusion">M'inscrire</button>
+                    </div>
+                    <div id="inscription-comm" style="margin-top: 10px;">
+                        <label for="prenom-diffusion">Ton prénom :</label>
+                        <input type="text" id="prenom-diffusion" name="prenom-diffusion">
+                        <button class="button" onclick="ajouterInscrit('diffusion')">Valider</button>
+                        <div id="inscrits-diffusion" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-diffusion">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Cuisine</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-subpoles">Sous-pôles : Catering, Restauration Festivalier, Cleanage</p>
+            <p class="pole-referents">Référent : Nono</p>
+            <button class="button plus-infos-btn" data-pole="cuisine">Plus d'infos</button>
+            <div class="infos-container" id="infos-cuisine">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Catering</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Thierry</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="catering">M'inscrire</button>
+                    </div>
+                    <div id="inscription-cuisine" style="margin-top: 10px;">
+                        <label for="prenom-catering">Ton prénom :</label>
+                        <input type="text" id="prenom-catering" name="prenom-catering">
+                        <button class="button" onclick="ajouterInscrit('catering')">Valider</button>
+                        <div id="inscrits-catering" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-catering">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Restauration Festivalier</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Nono, Frantzy ?</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="restauration">M'inscrire</button>
+                    </div>
+                    <div id="inscription-cuisine" style="margin-top: 10px;">
+                        <label for="prenom-restauration">Ton prénom :</label>
+                        <input type="text" id="prenom-restauration" name="prenom-restauration">
+                        <button class="button" onclick="ajouterInscrit('restauration')">Valider</button>
+                        <div id="inscrits-restauration" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-restauration">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Cleanage</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Sylvain</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="cleanage">M'inscrire</button>
+                    </div>
+                    <div id="inscription-cuisine" style="margin-top: 10px;">
+                        <label for="prenom-cleanage">Ton prénom :</label>
+                        <input type="text" id="prenom-cleanage" name="prenom-cleanage">
+                        <button class="button" onclick="ajouterInscrit('cleanage')">Valider</button>
+                        <div id="inscrits-cleanage" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-cleanage">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Green Team</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-subpoles">Sous-pôles : Nettoyage site (samedi matin), Installation des poubelles / cendriers, Toilettes Sèches</p>
+            <p class="pole-referents">Référent : (Nom à ajouter)</p>
+            <button class="button plus-infos-btn" data-pole="green-team">Plus d'infos</button>
+            <div class="infos-container" id="infos-green-team">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Nettoyage site (samedi matin)</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : (Nom à ajouter)</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="nettoyage-site">M'inscrire</button>
+                    </div>
+                    <div id="inscription-green-team" style="margin-top: 10px;">
+                        <label for="prenom-nettoyage-site">Ton prénom :</label>
+                        <input type="text" id="prenom-nettoyage-site" name="prenom-nettoyage-site">
+                        <button class="button" onclick="ajouterInscrit('nettoyage-site')">Valider</button>
+                        <div id="inscrits-nettoyage-site" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-nettoyage-site">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Installation des poubelles / cendriers</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : (Nom à ajouter)</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="installation-poubelles">M'inscrire</button>
+                    </div>
+                    <div id="inscription-green-team" style="margin-top: 10px;">
+                        <label for="prenom-installation-poubelles">Ton prénom :</label>
+                        <input type="text" id="prenom-installation-poubelles" name="prenom-installation-poubelles">
+                        <button class="button" onclick="ajouterInscrit('installation-poubelles')">Valider</button>
+                        <div id="inscrits-installation-poubelles" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-installation-poubelles">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Toilettes Sèches</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Isa, Sandrine</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="toilettes-seches">M'inscrire</button>
+                    </div>
+                    <div id="inscription-green-team" style="margin-top: 10px;">
+                        <label for="prenom-toilettes-seches">Ton prénom :</label>
+                        <input type="text" id="prenom-toilettes-seches" name="prenom-toilettes-seches">
+                        <button class="button" onclick="ajouterInscrit('toilettes-seches')">Valider</button>
+                        <div id="inscrits-toilettes-seches" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-toilettes-seches">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Montage/Démontage</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-subpoles">Sous-pôles : Bricol, Montage, Réseaux (élec, eau), Pôle Parking, Démontage</p>
+            <p class="pole-referents">Référent : (Nom à ajouter)</p>
+            <button class="button plus-infos-btn" data-pole="montage-demontage">Plus d'infos</button>
+            <div class="infos-container" id="infos-montage-demontage">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Bricol</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référents : Ben, Charly, Martin, Miguel, Rebel</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="bricol">M'inscrire</button>
+                    </div>
+                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                        <label for="prenom-bricol">Ton prénom :</label>
+                        <input type="text" id="prenom-bricol" name="prenom-bricol">
+                        <button class="button" onclick="ajouterInscrit('bricol')">Valider</button>
+                        <div id="inscrits-bricol" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-bricol">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Montage</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : (Nom à ajouter)</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="montage">M'inscrire</button>
+                    </div>
+                     <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                        <label for="prenom-montage">Ton prénom :</label>
+                        <input type="text" id="prenom-montage" name="prenom-montage">
+                        <button class="button" onclick="ajouterInscrit('montage')">Valider</button>
+                        <div id="inscrits-montage" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-montage">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Réseaux (élec, eau)</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : (Nom à ajouter)</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="reseaux">M'inscrire</button>
+                    </div>
+                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                        <label for="prenom-reseaux">Ton prénom :</label>
+                        <input type="text" id="prenom-reseaux" name="prenom-reseaux">
+                        <button class="button" onclick="ajouterInscrit('reseaux')">Valider</button>
+                        <div id="inscrits-reseaux" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-reseaux">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Pôle Parking</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référents : Hugo, Aymeric</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="parking">M'inscrire</button>
+                    </div>
+                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                        <label for="prenom-parking">Ton prénom :</label>
+                        <input type="text" id="prenom-parking" name="prenom-parking">
+                        <button class="button" onclick="ajouterInscrit('parking')">Valider</button>
+                        <div id="inscrits-parking" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-parking">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Démontage</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : (Nom à ajouter)</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="demontage">M'inscrire</button>
+                    </div>
+                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                        <label for="prenom-demontage">Ton prénom :</label>
+                        <input type="text" id="prenom-demontage" name="prenom-demontage">
+                        <button class="button" onclick="ajouterInscrit('demontage')">Valider</button>
+                        <div id="inscrits-demontage" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-demontage">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Relation Artiste</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-subpoles">Sous-pôles : Prog, Accueil (hébergement, loges, catering)</p>
+            <p class="pole-referents">Référent : (Nom à ajouter)</p>
+            <button class="button plus-infos-btn" data-pole="relation-artiste">Plus d'infos</button>
+            <div class="infos-container" id="infos-relation-artiste">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Prog</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Anto</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="prog">M'inscrire</button>
+                    </div>
+                    <div id="inscription-relation-artiste" style="margin-top: 10px;">
+                        <label for="prenom-prog">Ton prénom :</label>
+                        <input type="text" id="prenom-prog" name="prenom-prog">
+                        <button class="button" onclick="ajouterInscrit('prog')">Valider</button>
+                        <div id="inscrits-prog" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-prog">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Accueil (hébergement, loges, catering)</h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : (Nom à ajouter)</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="accueil">M'inscrire</button>
+                    </div>
+                    <div id="inscription-relation-artiste" style="margin-top: 10px;">
+                        <label for="prenom-accueil">Ton prénom :</label>
+                        <input type="text" id="prenom-accueil" name="prenom-accueil">
+                        <button class="button" onclick="ajouterInscrit('accueil')">Valider</button>
+                        <div id="inscrits-accueil" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-accueil">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Bar</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-subpoles">Sous-pôles : Grand Bar, Aux P'tits Bonheurs</p>
+            <p class="pole-referents">Référents : </p>
+            <button class="button plus-infos-btn" data-pole="bar">Plus d'infos</button>
+            <div class="infos-container" id="infos-bar">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Grand Bar</h3>
+                    <p>(Description)</p>
+                    <p>Référents : Ro et Mat</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="Grand-bar">M'inscrire</button>
+                    </div>
+                    <div id="inscription-bar" style="margin-top: 10px;">
+                        <label for="prenom-Grand-bar">Ton prénom :</label>
+                        <input type="text" id="prenom-Grand-bar" name="prenom-Grand-bar">
+                        <button class="button" onclick="ajouterInscrit('Grand-bar')">Valider</button>
+                        <div id="inscrits-Grand-bar" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-Grand-bar">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Aux P'tits Bonheur</h3>
+                    <p>(Description)</p>
+                    <p>Référents : Robin et Manon</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="Aux P'tits-bonheurs">M'inscrire</button>
+                    </div>
+                    <div id="inscription-bar" style="margin-top: 10px;">
+                        <label for="prenom-Aux P'tits-bonheurs">Ton prénom :</label>
+                        <input type="text" id="prenom-Aux P'tits-bonheurs" name="prenom-Aux P'tits-bonheurs">
+                        <button class="button" onclick="ajouterInscrit('Aux P\'tits-bonheurs')">Valider</button>
+                        <div id="inscrits-Aux P'tits-bonheurs" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-Aux P'tits-bonheurs">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Coordo Bénévoles</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-referents">Référents : Nico et Sandrine</p>
+            <button class="button plus-infos-btn" data-pole="coordo-benevole">Plus d'infos</button>
+            <div class="infos-container" id="infos-coordo-benevole">
+                 <div class="inscrire-btn-container">
+                    <button class="button inscrire-btn" data-pole="coordo-benevole">M'inscrire</button>
+                </div>
+                <div id="inscription-coordo-benevole" style="margin-top: 10px;">
+                    <label for="prenom-coordo-benevole">Ton prénom :</label>
+                    <input type="text" id="prenom-coordo-benevole" name="prenom-coordo-benevole">
+                    <button class="button" onclick="ajouterInscrit('coordo-benevole')">Valider</button>
+                    <div id="inscrits-coordo-benevole" style="margin-top: 10px;">
+                        Inscrits :
+                        <ul id="liste-inscrits-coordo-benevole">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pole-tile">
+            <h2 class="pole-title">Pôle Finances</h2>
+            <p>(Description à ajouter)</p>
+            <p class="pole-subpoles">Sous-pôles : Liste de courses, Sponsoring et Mécénat/Subvention</p>
+            <p class="pole-referents">Référents : Charly, Sandrine et Simon</p>
+            <button class="button plus-infos-btn" data-pole="finances">Plus d'infos</button>
+            <div class="infos-container" id="infos-finances">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Liste de courses </h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référent : Charly</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="liste-cours">M'inscrire</button>
+                    </div>
+                    <div id="inscription-finances" style="margin-top: 10px;">
+                        <label for="prenom-liste-cours">Ton prénom :</label>
+                        <input type="text" id="prenom-liste-cours" name="prenom-liste-cours">
+                        <button class="button" onclick="ajouterInscrit('liste-cours')">Valider</button>
+                        <div id="inscrits-liste-cours" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-liste-cours">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Sponsoring et Mécénat </h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référents : Thierry</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="subvention-mecenat">M'inscrire</button>
+                    </div>
+                    <div id="inscription-finances" style="margin-top: 10px;">
+                        <label for="prenom-subvention-mecenat">Ton prénom :</label>
+                        <input type="text" id="prenom-subvention-mecenat" name="prenom-subvention-mecenat">
+                        <button class="button" onclick="ajouterInscrit('subvention-mecenat')">Valider</button>
+                        <div id="inscrits-subvention-mecenat" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-subvention-mecenat">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Subventions </h3>
+                    <p>(Description à ajouter)</p>
+                    <p>Référents : Eléonore</p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="subvention-mecenat">M'inscrire</button>
+                    </div>
+                    <div id="inscription-finances" style="margin-top: 10px;">
+                        <label for="prenom-subvention-mecenat">Ton prénom :</label>
+                        <input type="text" id="prenom-subvention-mecenat" name="prenom-subvention-mecenat">
+                        <button class="button" onclick="ajouterInscrit('subvention-mecenat')">Valider</button>
+                        <div id="inscrits-subvention-mecenat" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-subvention-mecenat">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSy...",
+        authDomain: "festoch-orgamme.firebaseapp.com",
+        databaseURL: "https://festoch-orgamme-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "festoch-orgamme",
+        storageBucket: "festoch-orgamme.firebasestorage.app",
+        messagingSenderId: "1076...",
+        appId: "1:1076...:web:f881..."
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function ajouterInscrit(pole) {
+        const prenomInput = document.getElementById(`prenom-${pole}`);
+        const prenom = prenomInput.value.trim();
+
+        if (prenom !== "") {
+            db.collection("inscriptions").doc(pole).collection("benevoles").add({
+                prenom: prenom,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                console.log("Inscription ajoutée pour", pole);
+                prenomInput.value = "";
+                afficherInscrits(pole);
+            })
+            .catch(error => {
+                console.error("Erreur d'inscription pour", pole, error);
+                alert("Erreur: Impossible de s'inscrire. Réessayez.");
+            });
+        } else {
+            alert("Veuillez entrer votre prénom.");
+        }
+    }
+
+function afficherInscrits(pole) {
+    const listeInscrits = document.getElementById(`liste-inscrits-${pole}`);
+    if (!listeInscrits) {
+        console.warn(`Liste d'inscrits introuvable pour ${pole}`);
+        return;
+    }
+    
+    listeInscrits.innerHTML = "";
+
+    db.collection("inscriptions").doc(pole).collection("benevoles")
+        .orderBy("timestamp")
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                const li = document.createElement("li");
+                li.textContent = data.prenom;
+                
+                // Créer une croix rouge pour supprimer
+                const deleteBtn = document.createElement("span");
+                deleteBtn.innerHTML = " &#10060;"; // Emoji croix rouge
+                deleteBtn.style.color = "red";
+                deleteBtn.style.cursor = "pointer";
+                deleteBtn.style.marginLeft = "5px";
+                deleteBtn.title = "Supprimer ce bénévole";
+                
+                // Ajouter l'événement de clic pour supprimer
+                deleteBtn.addEventListener("click", function() {
+                    if (confirm(`Voulez-vous vraiment supprimer ${data.prenom} ?`)) {
+                        supprimerBenevole(pole, doc.id);
+                    }
+                });
+                
+                li.appendChild(deleteBtn);
+                listeInscrits.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error("Erreur de récupération des inscrits pour", pole, error);
+            listeInscrits.innerHTML = "<li>Erreur de chargement</li>";
+        });
+}
+    
+    // Attendre que le DOM soit complètement chargé
+    document.addEventListener('DOMContentLoaded', () => {
+        const plusInfosButtons = document.querySelectorAll('.plus-infos-btn');
+        const inscrireButtons = document.querySelectorAll('.inscrire-btn');
+        const inscrireSubpoleButtons = document.querySelectorAll('.inscrire-btn-subpole');
+
+        // Gestionnaires d'événements pour les boutons "Plus d'infos"
+        plusInfosButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const pole = button.dataset.pole;
+                const infosContainer = document.getElementById(`infos-${pole}`);
+                if (infosContainer.style.display === 'none' || infosContainer.style.display === '') {
+                    infosContainer.style.display = 'flex';
+                } else {
+                    infosContainer.style.display = 'none';
+                }
+            });
+        });
+
+        // Gestionnaires d'événements pour les boutons "M'inscrire" des pôles
+        inscrireButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const pole = button.dataset.pole;
+                const inscriptionDiv = document.getElementById(`inscription-${pole}`);
+                
+                if (inscriptionDiv) {
+                    if (inscriptionDiv.style.display === 'none' || inscriptionDiv.style.display === '') {
+                        inscriptionDiv.style.display = 'block';
+                    } else {
+                        inscriptionDiv.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Gestionnaires d'événements pour les boutons "M'inscrire" des sous-pôles
+        inscrireSubpoleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const subpole = button.dataset.subpole;
+                const poleParent = button.closest('.infos-container').id.replace('infos-', '');
+                const inscriptionDiv = document.getElementById(`inscription-${poleParent}`);
+                
+                if (inscriptionDiv) {
+                    if (inscriptionDiv.style.display === 'none' || inscriptionDiv.style.display === '') {
+                        inscriptionDiv.style.display = 'block';
+                    } else {
+                        inscriptionDiv.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Initialiser les listes d'inscrits pour tous les pôles
+        plusInfosButtons.forEach(button => {
+            const pole = button.dataset.pole;
+            try {
+                afficherInscrits(pole);
+            } catch (error) {
+                console.error(`Erreur lors de l'initialisation des inscrits pour ${pole}:`, error);
+            }
+        });
+
+        // Initialiser les listes d'inscrits pour tous les sous-pôles
+        inscrireSubpoleButtons.forEach(button => {
+            const subpole = button.dataset.subpole;
+            try {
+                afficherInscrits(subpole);
+            } catch (error) {
+                console.error(`Erreur lors de l'initialisation des inscrits pour le sous-pôle ${subpole}:`, error);
+            }
+        });
+    });
+
+function supprimerBenevole(pole, docId) {
+    db.collection("inscriptions").doc(pole).collection("benevoles").doc(docId)
+        .delete()
+        .then(() => {
+            console.log("Bénévole supprimé avec succès de", pole);
+            afficherInscrits(pole); // Rafraîchir la liste
+        })
+        .catch(error => {
+            console.error("Erreur lors de la suppression du bénévole de", pole, error);
+            alert("Erreur: Impossible de supprimer. Réessayez.");
+        });
+}
+</script>
+</body>
+</html>
