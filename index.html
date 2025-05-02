@@ -64,6 +64,7 @@
         }
         .pole-subpoles {
             font-style: italic;
+	font-weight: bold;
             color: #34d399;
             margin-bottom: 15px;
         }
@@ -429,8 +430,8 @@
         </div>
 
         <div class="pole-tile">
-            <h2 class="pole-title">Pôle Green Team</h2>
-            <p class="pole-subpoles">Sous-pôles : Nettoyage site (samedi matin), Installation des poubelles / cendriers, Toilettes Sèches</p>
+            <h2 class="pole-title">Pôle Propreté Site</h2>
+            <p class="pole-subpoles">Sous-pôles : Nettoyage site (samedi matin), Installation des poubelles / cendriers</p>
             <p class="pole-referents">Référent : </p>
             <button class="button plus-infos-btn" data-pole="green-team">Plus d'infos</button>
             <div class="infos-container" id="infos-green-team">
@@ -470,24 +471,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="subpole-info">
-                    <h3 class="subpole-title">Toilettes Sèches</h3>
-                    <p>Anticiper les commandes de fournitures et bien sur gérer l'accès aux toilettes sèches. Pourquoi pas imaginer des animations sur ce lieu...</p>
-                    <p>Référent : </p>
-                    <div class="inscrire-btn-container">
-                        <button class="button inscrire-btn-subpole" data-subpole="toilettes-seches">M'inscrire</button>
-                    </div>
-                    <div id="inscription-green-team" style="margin-top: 10px;">
-                        <label for="prenom-toilettes-seches">Ton prénom :</label>
-                        <input type="text" id="prenom-toilettes-seches" name="prenom-toilettes-seches">
-                        <button class="button" onclick="ajouterInscrit('toilettes-seches')">Valider</button>
-                        <div id="inscrits-toilettes-seches" style="margin-top: 10px;">
-                            Inscrits :
-                            <ul id="liste-inscrits-toilettes-seches">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
 
@@ -702,6 +686,29 @@
                 </div>
             </div>
         </div>
+
+	<div class="pole-tile">
+            <h2 class="pole-title">Pôle Toilettes Sèches</h2>
+            <p> Anticiper les commandes de fournitures et bien sur gérer l'accès aux toilettes sèches. Pourquoi pas imaginer des animations sur ce lieu... </p>
+            <p class="pole-referents">Référents : </p>
+            <button class="button plus-infos-btn" data-pole="Toilettes-Sèches">Plus d'infos</button>
+            <div class="infos-container" id="infos-Toilettes-Sèches">
+                 <div class="inscrire-btn-container">
+                    <button class="button inscrire-btn" data-pole="Toilettes-Sèches">M'inscrire</button>
+                </div>
+                <div id="inscription-Toilettes-Sèches" style="margin-top: 10px;">
+                    <label for="prenom-Toilettes-Sèches">Ton prénom :</label>
+                    <input type="text" id="prenom-Toilettes-Sèches" name="prenom-Toilettes-Sèches">
+                    <button class="button" onclick="ajouterInscrit('Toilettes-Sèches')">Valider</button>
+                    <div id="inscrits-Toilettes-Sèches" style="margin-top: 10px;">
+                        Inscrits :
+                        <ul id="liste-inscrits-Toilettes-Sèches">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="pole-tile">
             <h2 class="pole-title">Pôle Finances</h2>
