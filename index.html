@@ -735,6 +735,28 @@
         </div>
 
 	<div class="pole-tile">
+            <h2 class="pole-title">Pôle Exposants Artisans</h2>
+            <p> Gérer les candidatures pour venir exposer totu au long de l'année, organiser le stand et accueillir les exposants</p>
+            <p class="pole-referents">Référents : </p>
+            <button class="button plus-infos-btn" data-pole="expo">Plus d'infos</button>
+            <div class="infos-container" id="infos-expo">
+                 <div class="inscrire-btn-container">
+                    <button class="button inscrire-btn" data-pole="expo">M'inscrire</button>
+                </div>
+                <div id="inscription-expo" style="margin-top: 10px;">
+                    <label for="prenom-expo">Ton prénom :</label>
+                    <input type="text" id="prenom-coordo-benevole" name="prenom-expo">
+                    <button class="button" onclick="ajouterInscrit('expo')">Valider</button>
+                    <div id="inscrits-expo" style="margin-top: 10px;">
+                        Inscrits :
+                        <ul id="liste-inscrits-expo">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	<div class="pole-tile">
             <h2 class="pole-title">Pôle Toilettes Sèches</h2>
             <p> Anticiper les commandes de fournitures et bien sur gérer l'accès aux toilettes sèches. Pourquoi pas imaginer des animations sur ce lieu... </p>
             <p class="pole-referents">Référents : </p>
