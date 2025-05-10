@@ -218,6 +218,53 @@
             </div>
         </div>
 
+<div class="pole-tile">
+            <h2 class="pole-title">Billetterie et Monnaie</h2>
+            <p></p>
+            <p class="pole-subpoles">Sous-pôles : Billetterie, Monnaie</p>
+            <p class="pole-referents">Référent : </p>
+            <button class="button plus-infos-btn" data-pole="billetterie-monnaie">Plus d'infos</button>
+            <div class="infos-container" id="infos-billetterie-monnaie">
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Billetterie</h3>
+                    <p> Paramétrer la billetterie en ligne, suivre son évolution, gérer de la distribution au suivi la billetterie partenaires, éditer les invitations partenaires</p>
+                    <p>Référent : </p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="Billetterie">M'inscrire</button>
+                    </div>
+                     <div id="inscription-Billetterie" style="margin-top: 10px;">
+                        <label for="prenom-Billetterie">Ton prénom :</label>
+                        <input type="text" id="prenom-Billetterie" name="prenom-Billetterie">
+                        <button class="button" onclick="ajouterInscrit('Billetterie')">Valider</button>
+                        <div id="inscrits-Billetterie" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-Billetterie">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subpole-info">
+                    <h3 class="subpole-title">Monnaie</h3>
+                    <p>Concevoir les cartes avec l'aide du pôle Comm', éditer les cartes de Bonheur, préparer les cartes, étudier si besoin les solution autres</p>
+                    <p>Référent : </p>
+                    <div class="inscrire-btn-container">
+                        <button class="button inscrire-btn-subpole" data-subpole="Monnaie">M'inscrire</button>
+                    </div>
+                    <div id="inscription-Monnaie" style="margin-top: 10px;">
+                        <label for="prenom-Monnaie">Ton prénom :</label>
+                        <input type="text" id="prenom-Monnaie" name="prenom-Monnaie">
+                        <button class="button" onclick="ajouterInscrit('Monnaie')">Valider</button>
+                        <div id="inscrits-Monnaie" style="margin-top: 10px;">
+                            Inscrits :
+                            <ul id="liste-inscrits-Monnaie">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
         <div class="pole-tile">
             <h2 class="pole-title">Pôle Aprèm marmot</h2>
             <p>Dans ce pôle, l'idée est d'organiser l'aprèm marmot en trouvant un spectacle autour de la musique pour les marmots, gérer la compagnie/artiste mais aussi trouver et coordonner les animations qui peuvent intervenir (jeux en bois, crèpes, danse, pop corn...)</p>
@@ -298,7 +345,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="pancartage-exterieur">M'inscrire</button>
                     </div>
-                     <div id="inscription-comm" style="margin-top: 10px;">
+                     <div id="inscription-pancartage-exterieur" style="margin-top: 10px;">
                         <label for="prenom-pancartage-exterieur">Ton prénom :</label>
                         <input type="text" id="prenom-pancartage-exterieur" name="prenom-pancartage-exterieur">
                         <button class="button" onclick="ajouterInscrit('pancartage-exterieur')">Valider</button>
@@ -316,7 +363,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="pancartage-interieur">M'inscrire</button>
                     </div>
-                    <div id="inscription-comm" style="margin-top: 10px;">
+                    <div id="inscription-pancartage-interieur" style="margin-top: 10px;">
                         <label for="prenom-pancartage-interieur">Ton prénom :</label>
                         <input type="text" id="prenom-pancartage-interieur" name="prenom-pancartage-interieur">
                         <button class="button" onclick="ajouterInscrit('pancartage-interieur')">Valider</button>
@@ -334,7 +381,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="reseaux-sociaux">M'inscrire</button>
                     </div>
-                    <div id="inscription-comm" style="margin-top: 10px;">
+                    <div id="inscription-reseaux-sociaux" style="margin-top: 10px;">
                         <label for="prenom-reseaux-sociaux">Ton prénom :</label>
                         <input type="text" id="prenom-reseaux-sociaux" name="prenom-reseaux-sociaux">
                         <button class="button" onclick="ajouterInscrit('reseaux-sociaux')">Valider</button>
@@ -352,7 +399,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="diffusion">M'inscrire</button>
                     </div>
-                    <div id="inscription-comm" style="margin-top: 10px;">
+                    <div id="inscription-diffusion" style="margin-top: 10px;">
                         <label for="prenom-diffusion">Ton prénom :</label>
                         <input type="text" id="prenom-diffusion" name="prenom-diffusion">
                         <button class="button" onclick="ajouterInscrit('diffusion')">Valider</button>
@@ -379,7 +426,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="catering">M'inscrire</button>
                     </div>
-                    <div id="inscription-cuisine" style="margin-top: 10px;">
+                    <div id="inscription-catering" style="margin-top: 10px;">
                         <label for="prenom-catering">Ton prénom :</label>
                         <input type="text" id="prenom-catering" name="prenom-catering">
                         <button class="button" onclick="ajouterInscrit('catering')">Valider</button>
@@ -397,7 +444,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="restauration">M'inscrire</button>
                     </div>
-                    <div id="inscription-cuisine" style="margin-top: 10px;">
+                    <div id="inscription-restauration" style="margin-top: 10px;">
                         <label for="prenom-restauration">Ton prénom :</label>
                         <input type="text" id="prenom-restauration" name="prenom-restauration">
                         <button class="button" onclick="ajouterInscrit('restauration')">Valider</button>
@@ -415,7 +462,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="cleanage">M'inscrire</button>
                     </div>
-                    <div id="inscription-cuisine" style="margin-top: 10px;">
+                    <div id="inscription-cleanage" style="margin-top: 10px;">
                         <label for="prenom-cleanage">Ton prénom :</label>
                         <input type="text" id="prenom-cleanage" name="prenom-cleanage">
                         <button class="button" onclick="ajouterInscrit('cleanage')">Valider</button>
@@ -442,7 +489,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="nettoyage-site">M'inscrire</button>
                     </div>
-                    <div id="inscription-green-team" style="margin-top: 10px;">
+                    <div id="inscription-nettoyage-site" style="margin-top: 10px;">
                         <label for="prenom-nettoyage-site">Ton prénom :</label>
                         <input type="text" id="prenom-nettoyage-site" name="prenom-nettoyage-site">
                         <button class="button" onclick="ajouterInscrit('nettoyage-site')">Valider</button>
@@ -460,7 +507,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="installation-poubelles">M'inscrire</button>
                     </div>
-                    <div id="inscription-green-team" style="margin-top: 10px;">
+                    <div id="inscription-installation-poubelles" style="margin-top: 10px;">
                         <label for="prenom-installation-poubelles">Ton prénom :</label>
                         <input type="text" id="prenom-installation-poubelles" name="prenom-installation-poubelles">
                         <button class="button" onclick="ajouterInscrit('installation-poubelles')">Valider</button>
@@ -489,7 +536,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="bricol">M'inscrire</button>
                     </div>
-                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                    <div id="inscription-bricol" style="margin-top: 10px;">
                         <label for="prenom-bricol">Ton prénom :</label>
                         <input type="text" id="prenom-bricol" name="prenom-bricol">
                         <button class="button" onclick="ajouterInscrit('bricol')">Valider</button>
@@ -507,7 +554,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="montage">M'inscrire</button>
                     </div>
-                     <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                     <div id="inscription-montage" style="margin-top: 10px;">
                         <label for="prenom-montage">Ton prénom :</label>
                         <input type="text" id="prenom-montage" name="prenom-montage">
                         <button class="button" onclick="ajouterInscrit('montage')">Valider</button>
@@ -525,7 +572,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="reseaux">M'inscrire</button>
                     </div>
-                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                    <div id="inscription-reseaux" style="margin-top: 10px;">
                         <label for="prenom-reseaux">Ton prénom :</label>
                         <input type="text" id="prenom-reseaux" name="prenom-reseaux">
                         <button class="button" onclick="ajouterInscrit('reseaux')">Valider</button>
@@ -543,7 +590,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="parking">M'inscrire</button>
                     </div>
-                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                    <div id="inscription-parking" style="margin-top: 10px;">
                         <label for="prenom-parking">Ton prénom :</label>
                         <input type="text" id="prenom-parking" name="prenom-parking">
                         <button class="button" onclick="ajouterInscrit('parking')">Valider</button>
@@ -561,7 +608,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="demontage">M'inscrire</button>
                     </div>
-                    <div id="inscription-montage-demontage" style="margin-top: 10px;">
+                    <div id="inscription-demontage" style="margin-top: 10px;">
                         <label for="prenom-demontage">Ton prénom :</label>
                         <input type="text" id="prenom-demontage" name="prenom-demontage">
                         <button class="button" onclick="ajouterInscrit('demontage')">Valider</button>
@@ -588,7 +635,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="prog">M'inscrire</button>
                     </div>
-                    <div id="inscription-relation-artiste" style="margin-top: 10px;">
+                    <div id="inscription-prog" style="margin-top: 10px;">
                         <label for="prenom-prog">Ton prénom :</label>
                         <input type="text" id="prenom-prog" name="prenom-prog">
                         <button class="button" onclick="ajouterInscrit('prog')">Valider</button>
@@ -606,7 +653,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="accueil">M'inscrire</button>
                     </div>
-                    <div id="inscription-relation-artiste" style="margin-top: 10px;">
+                    <div id="inscription-accueil" style="margin-top: 10px;">
                         <label for="prenom-accueil">Ton prénom :</label>
                         <input type="text" id="prenom-accueil" name="prenom-accueil">
                         <button class="button" onclick="ajouterInscrit('accueil')">Valider</button>
@@ -633,7 +680,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="Grand-bar">M'inscrire</button>
                     </div>
-                    <div id="inscription-bar" style="margin-top: 10px;">
+                    <div id="inscription-Grand-bar" style="margin-top: 10px;">
                         <label for="prenom-Grand-bar">Ton prénom :</label>
                         <input type="text" id="prenom-Grand-bar" name="prenom-Grand-bar">
                         <button class="button" onclick="ajouterInscrit('Grand-bar')">Valider</button>
@@ -651,7 +698,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="Aux P'tits-bonheurs">M'inscrire</button>
                     </div>
-                    <div id="inscription-bar" style="margin-top: 10px;">
+                    <div id="inscription-Aux P'tits-bonheurs" style="margin-top: 10px;">
                         <label for="prenom-Aux P'tits-bonheurs">Ton prénom :</label>
                         <input type="text" id="prenom-Aux P'tits-bonheurs" name="prenom-Aux P'tits-bonheurs">
                         <button class="button" onclick="ajouterInscrit('Aux P\'tits-bonheurs')">Valider</button>
@@ -724,7 +771,7 @@
                     <div class="inscrire-btn-container">
                         <button class="button inscrire-btn-subpole" data-subpole="liste-cours">M'inscrire</button>
                     </div>
-                    <div id="inscription-finances" style="margin-top: 10px;">
+                    <div id="inscription-cours" style="margin-top: 10px;">
                         <label for="prenom-liste-cours">Ton prénom :</label>
                         <input type="text" id="prenom-liste-cours" name="prenom-liste-cours">
                         <button class="button" onclick="ajouterInscrit('liste-cours')">Valider</button>
@@ -740,15 +787,15 @@
                     <p>Aller chercher des sponsors et mécènes et surtout des €€€. Organiser aussi la soirée partenaire...</p>
                     <p>Référents : </p>
                     <div class="inscrire-btn-container">
-                        <button class="button inscrire-btn-subpole" data-subpole="subvention-mecenat">M'inscrire</button>
+                        <button class="button inscrire-btn-subpole" data-subpole="sponsoring-mecenat">M'inscrire</button>
                     </div>
-                    <div id="inscription-finances" style="margin-top: 10px;">
-                        <label for="prenom-subvention-mecenat">Ton prénom :</label>
-                        <input type="text" id="prenom-subvention-mecenat" name="prenom-subvention-mecenat">
+                    <div id="inscription-sponsoring-mecenat" style="margin-top: 10px;">
+                        <label for="prenom-sponsoring-mecenat">Ton prénom :</label>
+                        <input type="text" id="prenom-subvention-mecenat" name="prenom-sponsoring-mecenat">
                         <button class="button" onclick="ajouterInscrit('subvention-mecenat')">Valider</button>
-                        <div id="inscrits-subvention-mecenat" style="margin-top: 10px;">
+                        <div id="inscrits-sponsoring-mecenat" style="margin-top: 10px;">
                             Inscrits :
-                            <ul id="liste-inscrits-subvention-mecenat">
+                            <ul id="liste-inscrits-sponsoring-mecenat">
                             </ul>
                         </div>
                     </div>
@@ -758,15 +805,15 @@
                    <p>Essayer d'avoir des subs, répondre à des appels à projet...</p>
                     <p>Référents : </p>
                     <div class="inscrire-btn-container">
-                        <button class="button inscrire-btn-subpole" data-subpole="subvention-mecenat">M'inscrire</button>
+                        <button class="button inscrire-btn-subpole" data-subpole="subvention">M'inscrire</button>
                     </div>
-                    <div id="inscription-finances" style="margin-top: 10px;">
-                        <label for="prenom-subvention-mecenat">Ton prénom :</label>
-                        <input type="text" id="prenom-subvention-mecenat" name="prenom-subvention-mecenat">
+                    <div id="inscription-subvention" style="margin-top: 10px;">
+                        <label for="prenom-subvention">Ton prénom :</label>
+                        <input type="text" id="prenom-subvention-mecenat" name="prenom-subvention">
                         <button class="button" onclick="ajouterInscrit('subvention-mecenat')">Valider</button>
-                        <div id="inscrits-subvention-mecenat" style="margin-top: 10px;">
+                        <div id="inscrits-subvention" style="margin-top: 10px;">
                             Inscrits :
-                            <ul id="liste-inscrits-subvention-mecenat">
+                            <ul id="liste-inscrits-subvention">
                             </ul>
                         </div>
                     </div>
@@ -864,32 +911,26 @@ function afficherInscrits(pole) {
 
         // Gestionnaires d'événements pour les boutons "Plus d'infos"
         plusInfosButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const pole = button.dataset.pole;
-                const infosContainer = document.getElementById(`infos-${pole}`);
-                if (infosContainer.style.display === 'none' || infosContainer.style.display === '') {
-                    infosContainer.style.display = 'flex';
-                } else {
-                    infosContainer.style.display = 'none';
-                }
-            });
-        });
-
-        // Gestionnaires d'événements pour les boutons "M'inscrire" des pôles
-        inscrireButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const pole = button.dataset.pole;
-                const inscriptionDiv = document.getElementById(`inscription-${pole}`);
-                
-                if (inscriptionDiv) {
-                    if (inscriptionDiv.style.display === 'none' || inscriptionDiv.style.display === '') {
-                        inscriptionDiv.style.display = 'block';
-                    } else {
-                        inscriptionDiv.style.display = 'none';
-                    }
-                }
-            });
-        });
+    button.addEventListener('click', () => {
+        const pole = button.dataset.pole;
+        const infosContainer = document.getElementById(`infos-${pole}`);
+        
+        if (infosContainer.style.display === 'none' || infosContainer.style.display === '') {
+            infosContainer.style.display = 'flex';
+            
+            // NOUVEAU: Afficher automatiquement le formulaire d'inscription lorsqu'on clique sur "Plus d'infos"
+            const inscriptionDiv = document.getElementById(`inscription-${pole}`);
+            if (inscriptionDiv) {
+                inscriptionDiv.style.display = 'block';
+            }
+        } else {
+            infosContainer.style.display = 'none';
+            
+            // J'ai laissé en commentaire l'option de masquer le formulaire quand on ferme les infos
+            // Vous pouvez décommenter ces lignes si vous préférez ce comportement
+        }
+    });
+});
 
         // Gestionnaires d'événements pour les boutons "M'inscrire" des sous-pôles
         inscrireSubpoleButtons.forEach(button => {
